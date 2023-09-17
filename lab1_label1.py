@@ -69,14 +69,14 @@ y_pred_final = model_final.predict(reduced_pca_test_X)
 
 rows, columns = reduced_pca_train_X.shape
 
-feature_names = ["feature_" + str(i) for i in range(1, columns + 1)]
+feature_names = ["new_feature_" + str(i) for i in range(1, columns + 1)]
 
 data_frame = pd.DataFrame(reduced_pca_test_X, columns=feature_names)
 
 new_columns = {
-    'No. of features': columns,
-    'Predicted labels after' : y_pred_final,
-    'Predicted labels before' : y_pred_before
+    'Predicted labels before feature engineering' : y_pred_before,
+    'Predicted labels after feature engineering' : y_pred_final,
+    'No of new features': columns
 }
 
 """Concatenate feature data and results"""
@@ -86,5 +86,5 @@ results_df = pd.DataFrame(new_columns)
 reduced_pca_test_X_df = pd.DataFrame(reduced_pca_test_X, columns=feature_names)
 final_df = pd.concat([results_df, reduced_pca_test_X_df], axis=1)
 
-csv_file_path = '190359P_label_1.csv'
+csv_file_path = '../../Downloads/190359P_label_1.csv'
 final_df.to_csv(csv_file_path, index=False)

@@ -60,12 +60,12 @@ y_pred_after = model_after.predict(pca_df_test_X)
 """Prepare the DataFrame for export and save dataframe to cvs file"""
 
 columns = pca_df_test_X.shape[1]
-feature_names = [f"feature_{i}" for i in range(1, columns + 1)]
+feature_names = [f"new_feature_{i}" for i in range(1, columns + 1)]
 
 data_frame = pd.DataFrame(pca_df_test_X, columns=feature_names)
-data_frame.insert(0, 'Predicted labels before', y_pred_before)
-data_frame.insert(1, 'Predicted labels after', y_pred_after)
-data_frame.insert(2, 'No. of features', columns)
+data_frame.insert(0, 'Predicted labels before feature engineering', y_pred_before)
+data_frame.insert(1, 'Predicted labels after feature engineering', y_pred_after)
+data_frame.insert(2, 'No of new features', columns)
 
-csv_file_path = '190359P_label_2.csv'
+csv_file_path = '../../Downloads/190359P_label_2.csv'
 data_frame.to_csv(csv_file_path, index=False)

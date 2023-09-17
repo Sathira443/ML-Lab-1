@@ -53,18 +53,18 @@ y_pred_after = model_after.predict(pca_df_test_X)
 
 """Create a DataFrame for the transformed data"""
 
-feature_names = [f"feature_{i}" for i in range(1, pca_df_test_X.shape[1] + 1)]
+feature_names = [f"new_feature_{i}" for i in range(1, pca_df_test_X.shape[1] + 1)]
 pca_df_test_X_df = pd.DataFrame(pca_df_test_X, columns=feature_names)
 
 summary_df = pd.DataFrame({
-    'No. of features': [pca_df_test_X.shape[1]] * len(df_test_X),
-    'Predicted labels before': y_pred_before,
-    'Predicted labels after': y_pred_after,
+    'Predicted labels before feature engineering': y_pred_before,
+    'Predicted labels after feature engineering': y_pred_after,
+    'No of new features': [pca_df_test_X.shape[1]] * len(df_test_X)
 })
 
 final_df = pd.concat([summary_df, pca_df_test_X_df], axis=1)
 
 """Save the final DataFrame to a CSV"""
 
-csv_file_path = '190359P_label_3.csv'
+csv_file_path = '../../Downloads/190359P_label_3.csv'
 final_df.to_csv(csv_file_path, index=False)

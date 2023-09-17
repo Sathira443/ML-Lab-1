@@ -54,14 +54,14 @@ knn_model_after.fit(train_features_pca, train_labels)
 predicted_labels_after = knn_model_after.predict(test_features_pca)
 
 # Create a DataFrame for transformed features
-pca_feature_names = [f"feature_{i}" for i in range(1, test_features_pca.shape[1] + 1)]
+pca_feature_names = [f"new_feature_{i}" for i in range(1, test_features_pca.shape[1] + 1)]
 pca_df = pd.DataFrame(test_features_pca, columns=pca_feature_names)
 
 # Prepare data for CSV export
 result_data = {
-    'No. of features': [test_features_pca.shape[1]] * len(test_features_pca),
-    'Predicted labels after': predicted_labels_after,
-    'Predicted labels before': predicted_labels_before
+    'Predicted labels before feature engineering': predicted_labels_before,
+    'Predicted labels after feature engineering': predicted_labels_after,
+    'No of new features': [test_features_pca.shape[1]] * len(test_features_pca),
 }
 
 # Create a DataFrame using the result_data dictionary
@@ -71,5 +71,5 @@ result_df = pd.DataFrame(result_data)
 final_df = pd.concat([result_df, pca_df], axis=1)
 
 # Export DataFrame to CSV
-csv_file_path = '190359P_label_4.csv'
+csv_file_path = '../../Downloads/190359P_label_4.csv'
 final_df.to_csv(csv_file_path, index=False)
